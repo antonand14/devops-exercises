@@ -1,3 +1,6 @@
 FROM python:3.12-slim
+WORKDIR /app
 COPY app.py .
-CMD ["python", "app.py"]
+USER nobody
+EXPOSE 8080
+CMD ["python3", "app.py"]

@@ -5,9 +5,10 @@ from datetime import datetime
 
 request_log = []
 
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        message = os.environ["MESSAGE"]
+        message = os.environ["APP_MESSAGE"]
         request_log.append(datetime.utcnow().isoformat())
 
         payload = {
@@ -22,5 +23,6 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", len(body))
         self.end_headers()
         self.wfile.write(body)
+
 
 HTTPServer(("", 8080), Handler).serve_forever()
