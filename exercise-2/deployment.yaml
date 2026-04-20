@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greeter
+  labels:
+    app: greeter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: greeter
+  template:
+    metadata:
+      labels:
+        app: greeter
+    spec:
+      containers:
+      - name: greeter
+        image: greeter:v1
+        imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: greeter-config
+        ports:
+        - containerPort: 8080
+
